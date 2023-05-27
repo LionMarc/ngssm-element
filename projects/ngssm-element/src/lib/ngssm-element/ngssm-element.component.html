@@ -1,0 +1,5 @@
+<mat-spinner [diameter]="20" *ngIf="loadingStatus().status === remoteCallStatus.inProgress"></mat-spinner>
+<div class="ngssm-element-error flex-row-center" *ngIf="loadingStatus().status === remoteCallStatus.ko">
+    <mat-icon class="fa-solid fa-xmark with-margin-right-12"></mat-icon>
+    {{loadingStatus().message}}
+</div>

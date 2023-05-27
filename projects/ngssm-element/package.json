@@ -1,0 +1,21 @@
+{
+  "name": "ngssm-element",
+  "version": "0.0.1",
+  "description": "Helper to load a custom element.",
+  "author": "Lion Marc",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": ">=16.0.0",
+    "@angular/core": ">=16.0.0",
+    "ngssm-store": ">=16.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LionMarc/ngssm-element",
+    "directory": "projects/ngssm-element"
+  }
+}
