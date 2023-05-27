@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy, importProvidersFrom } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ConsoleAppender, NgSsmComponent, Store } from 'ngssm-store';
 import { MatCardModule } from '@angular/material/card';
 import { NgssmCachesDisplayButtonComponent } from 'ngssm-remote-data';
-
 
 @Component({
   selector: 'app-football-teams-dashboard',

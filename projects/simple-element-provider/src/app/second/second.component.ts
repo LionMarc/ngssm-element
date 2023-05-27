@@ -14,5 +14,7 @@ import { NgSsmComponent, Store } from 'ngssm-store';
 export class SecondComponent extends NgSsmComponent {
   constructor(store: Store) {
     super(store);
+
+    this.unsubscribeAll$.subscribe(() => console.log('SecondComponent DESTROYED'));
   }
 }

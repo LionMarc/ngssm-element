@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NgSsmComponent, Store } from 'ngssm-store';
@@ -14,5 +14,9 @@ import { NgSsmComponent, Store } from 'ngssm-store';
 export class SimpleComponent extends NgSsmComponent {
   constructor(store: Store) {
     super(store);
+
+    this.unsubscribeAll$.subscribe(() => console.log('SimpleComponent DESTROYED'));
   }
+
+  @Input() public count = 0;
 }
