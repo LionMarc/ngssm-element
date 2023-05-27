@@ -23,7 +23,27 @@
       </mat-form-field>
     </mat-card>
     <mat-card class="flex-column-stretch fxFlex">
-      <ngssm-element [name]="selectedElementName() ?? ''" class="fxFlex"></ngssm-element>
+      <ngssm-element [name]="selectedElementName()" class="fxFlex"></ngssm-element>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="flex-column-stretch custom-element-demo">
+  <mat-card-header>
+    <mat-card-title>
+      Test element input data
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="flex-row-stretch fxFlex">
+    <mat-card class="flex-column-stretch with-margin-right-12 selector-container">
+      <mat-form-field>
+        <mat-label>Set counter value</mat-label>
+        <input matInput type="number" [formControl]="counterControl">
+      </mat-form-field>
+    </mat-card>
+    <mat-card class="flex-column-stretch fxFlex">
+      <ngssm-element [name]="'ngssm-element-simple'" class="fxFlex"
+        [data]="data()"></ngssm-element>
     </mat-card>
   </mat-card-content>
 </mat-card>

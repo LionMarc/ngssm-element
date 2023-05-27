@@ -10,6 +10,7 @@ export const updateFootballTeamsState = (state: State, command: Spec<FootballTea
     [FootballTeamsStateSpecification.featureStateKey]: command
   });
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FootballTeamsState {}
 
 @NgSsmFeatureState({
