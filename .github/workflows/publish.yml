@@ -16,6 +16,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm run build:ngssm-element
+      - run: chmod +x publish_packages.sh
       - run: ./publish_packages.sh ${{ github.event.release.tag_name }}
         shell: bash
         env:
