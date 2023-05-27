@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .selector-container {
+        min-width: 400px;
+        max-width: 400px;
+    }
+
+    .custom-element-demo {
+        min-height: 600px;
+        max-height: 600px;
+    }
+}
