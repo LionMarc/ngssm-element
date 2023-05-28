@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RemoteCall, RemoteCallStatus } from 'ngssm-remote-data';
 
 import { NgssmElementsLoaderService } from '../ngssm-elements-loader.service';
+import { WithAccessToken } from '../with-access-token';
 
 @Component({
   selector: 'ngssm-element',
@@ -17,6 +18,7 @@ import { NgssmElementsLoaderService } from '../ngssm-elements-loader.service';
 export class NgssmElementComponent implements OnDestroy {
   private element: HTMLElement | undefined;
   private _data: object | undefined;
+  private _accessToken: string | null | undefined;
 
   public readonly loadingStatus = signal<RemoteCall>({ status: RemoteCallStatus.none });
   public readonly remoteCallStatus = RemoteCallStatus;
@@ -39,6 +41,7 @@ export class NgssmElementComponent implements OnDestroy {
         this.element = document.createElement(value);
         this.viewContainerRef.element.nativeElement.appendChild(this.element);
         this.setDataToElement();
+        this.setAccessTokenToElement();
       }
 
       if (status.status === RemoteCallStatus.done || status.status === RemoteCallStatus.ko) {
@@ -50,6 +53,11 @@ export class NgssmElementComponent implements OnDestroy {
   @Input() public set data(value: object) {
     this._data = value;
     this.setDataToElement();
+  }
+
+  @Input() public set accessToken(value: string | null | undefined) {
+    this._accessToken = value;
+    this.setAccessTokenToElement();
   }
 
   public ngOnDestroy(): void {
@@ -66,5 +74,15 @@ export class NgssmElementComponent implements OnDestroy {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Object.keys(this._data).forEach((key) => ((this.element as any)[key] = (this._data as any)[key]));
+  }
+
+  private setAccessTokenToElement(): void {
+    if (!this.element) {
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const withAccessToken: WithAccessToken = this.element as any;
+    withAccessToken.accessToken = this._accessToken;
   }
 }
