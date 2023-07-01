@@ -21,8 +21,17 @@ export class NgssmElementsLoaderService {
   constructor(private logger: Logger, @Inject(DOCUMENT) private document: Document) {}
 
   public addElementConfig(elementConfig: NgssmElementConfig): boolean {
-    if (this.elementConfigs.findIndex((e) => e.config.url === elementConfig.url) !== -1) {
-      this.logger.error(`[NgssmElementsLoaderService] There is already a config for '${elementConfig.url}'`);
+    const config = this.elementConfigs.find((e) => e.config.url === elementConfig.url);
+    if (config) {
+      if (
+        config.config.names.length !== elementConfig.names.length ||
+        config.config.names.findIndex((n) => !elementConfig.names.includes(n)) !== -1
+      ) {
+        this.logger.error(
+          `[NgssmElementsLoaderService] There is already a config for '${elementConfig.url}' with not the same names`
+        );
+      }
+
       return false;
     }
 
