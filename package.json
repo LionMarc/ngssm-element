@@ -11,7 +11,8 @@
     "build:ngssm-element": "ng build --project=ngssm-element",
     "test:ngssm-element": "ng test --no-watch --browsers=ChromeHeadless --project=ngssm-element --code-coverage",
     "build:element-provider": "ng build --project=element-provider && cat ./dist/element-provider/runtime*.js ./dist/element-provider/polyfill*.js ./dist/element-provider/main*.js > ./src/assets/provided-elements.js",
-    "build:simple-element-provider": "ng build --project=simple-element-provider && cat ./dist/simple-element-provider/runtime*.js ./dist/simple-element-provider/polyfill*.js ./dist/simple-element-provider/main*.js > ./src/assets/simple-elements.js"
+    "build:simple-element-provider": "ng build --project=simple-element-provider && cat ./dist/simple-element-provider/runtime*.js ./dist/simple-element-provider/polyfill*.js ./dist/simple-element-provider/main*.js > ./src/assets/simple-elements.js",
+    "build:all": "npm run build:element-provider && npm run build:simple-element-provider && npm run build:ngssm-element"
   },
   "private": true,
   "dependencies": {

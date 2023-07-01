@@ -17,7 +17,7 @@ export class FootballTeamsDashboardComponent extends NgSsmComponent {
   constructor(store: Store, consoleAppender: ConsoleAppender) {
     super(store);
 
-    consoleAppender.start();
+    consoleAppender.start('football-teams');
 
     this.unsubscribeAll$.subscribe(() => consoleAppender.stop());
   }
