@@ -26,7 +26,10 @@ export class NgssmElementComponent implements OnDestroy {
   public readonly loadingStatus = signal<RemoteCall>({ status: RemoteCallStatus.inProgress });
   public readonly remoteCallStatus = RemoteCallStatus;
 
-  constructor(private viewContainerRef: ViewContainerRef, private loaderService: NgssmElementsLoaderService) {}
+  constructor(
+    private viewContainerRef: ViewContainerRef,
+    private loaderService: NgssmElementsLoaderService
+  ) {}
 
   @Input() public set attributes(value: { name: string; value: any }[]) {
     this._attributes = value;
