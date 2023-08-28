@@ -18,7 +18,10 @@ interface ExtendedNgssmElementConfig {
 export class NgssmElementsLoaderService {
   private readonly elementConfigs: ExtendedNgssmElementConfig[] = [];
 
-  constructor(private logger: Logger, @Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    private logger: Logger,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
   public addElementConfig(elementConfig: NgssmElementConfig): boolean {
     const config = this.elementConfigs.find((e) => e.config.url === elementConfig.url);
