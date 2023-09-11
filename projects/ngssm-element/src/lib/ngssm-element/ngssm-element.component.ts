@@ -9,6 +9,7 @@ import { RemoteCall, RemoteCallStatus } from 'ngssm-remote-data';
 
 import { NgssmElementsLoaderService } from '../ngssm-elements-loader.service';
 import { WithAccessToken } from '../with-access-token';
+import { Logger } from 'ngssm-store';
 
 @Component({
   selector: 'ngssm-element',
@@ -22,13 +23,15 @@ export class NgssmElementComponent implements OnDestroy {
   private _data: object | undefined;
   private _accessToken: string | null | undefined;
   private _attributes: { name: string; value: any }[] = [];
+  private _debug = false;
 
   public readonly loadingStatus = signal<RemoteCall>({ status: RemoteCallStatus.inProgress });
   public readonly remoteCallStatus = RemoteCallStatus;
 
   constructor(
     private viewContainerRef: ViewContainerRef,
-    private loaderService: NgssmElementsLoaderService
+    private loaderService: NgssmElementsLoaderService,
+    private logger: Logger
   ) {}
 
   @Input() public set attributes(value: { name: string; value: any }[]) {
@@ -37,6 +40,10 @@ export class NgssmElementComponent implements OnDestroy {
   }
 
   @Input() public set data(value: object) {
+    if (this._debug) {
+      this.logger.debug(`[NgssmElementComponent] data=`, value);
+    }
+
     this._data = value;
     this.setDataToElement();
   }
@@ -47,9 +54,14 @@ export class NgssmElementComponent implements OnDestroy {
   }
 
   @Input() public set name(value: string | null | undefined) {
+    if (this._debug) {
+      this.logger.debug(`[NgssmElementComponent] name=`, value);
+    }
+
     if (this.element) {
       this.viewContainerRef.element.nativeElement.removeChild(this.element);
     }
+
     this.viewContainerRef.clear();
 
     if (!value) {
@@ -74,6 +86,10 @@ export class NgssmElementComponent implements OnDestroy {
       });
   }
 
+  @Input() public set debug(value: boolean | undefined | null) {
+    this._debug = value === true;
+  }
+
   public ngOnDestroy(): void {
     if (this.element) {
       this.viewContainerRef.element.nativeElement.removeChild(this.element);
@@ -84,6 +100,10 @@ export class NgssmElementComponent implements OnDestroy {
   private setDataToElement(): void {
     if (!this.element || !this._data) {
       return;
+    }
+
+    if (this._debug) {
+      this.logger.debug(`[NgssmElementComponent] setDataToElement`, this._data);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
