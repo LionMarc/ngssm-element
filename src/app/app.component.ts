@@ -1,15 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-
-import { NgssmElementComponent, NgssmElementsLoaderService } from 'ngssm-element';
-import { NgssmCachesDisplayButtonComponent } from 'ngssm-remote-data';
-import { ConsoleAppender } from 'ngssm-store';
-import { MatCardModule } from '@angular/material/card';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+import { NgssmElementComponent, NgssmElementsLoaderService, NgssmEventBus } from 'ngssm-element';
+import { NgssmCachesDisplayButtonComponent } from 'ngssm-remote-data';
+import { ConsoleAppender, Logger } from 'ngssm-store';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
     MatToolbarModule,
     MatCardModule,
     MatInputModule,
+    MatButtonModule,
     NgssmElementComponent,
     NgssmCachesDisplayButtonComponent
   ],
@@ -41,7 +43,12 @@ export class AppComponent {
   public readonly counterControl = new FormControl(0);
   public readonly data = signal<{ count: number }>({ count: 0 });
 
-  constructor(elementsLoaderService: NgssmElementsLoaderService, consoleAppender: ConsoleAppender) {
+  constructor(
+    elementsLoaderService: NgssmElementsLoaderService,
+    consoleAppender: ConsoleAppender,
+    private eventBus: NgssmEventBus,
+    private logger: Logger
+  ) {
     consoleAppender.start();
     elementsLoaderService.addElementConfig({
       url: './assets/provided-elements.js',
@@ -53,5 +60,17 @@ export class AppComponent {
     });
 
     this.counterControl.valueChanges.subscribe((value) => this.data.set({ count: value ?? -1 }));
+
+    this.eventBus.event$.subscribe((e) => this.logger.information(`Event of type '${e.type}' received`, e));
+  }
+
+  public publisEventToFootballTeam(): void {
+    this.eventBus.publish({
+      type: 'football-team',
+      data: {
+        time: new Date(),
+        test: true
+      }
+    });
   }
 }
