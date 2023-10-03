@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, EnvironmentProviders, InjectionToken, makeEnvironmentProviders } from '@angular/core';
+import { APP_INITIALIZER, EnvironmentProviders, InjectionToken, Type, makeEnvironmentProviders } from '@angular/core';
 import { Observable, filter } from 'rxjs';
 
 import { NgssmEvent, NgssmEventBus } from './ngssm-event-bus';
@@ -68,17 +68,21 @@ export const publishAccessTokenFactory = (
 };
 
 export const provideNgssmElementForElementsHost = (
-  accessTokenProvider: AccessTokenProvider,
-  accessToken: Observable<string>
+  accessTokenProviderType: Type<AccessTokenProvider>,
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  accessTokenObservableFactory: Function,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  factoryDeps?: any[]
 ): EnvironmentProviders => {
   return makeEnvironmentProviders([
     {
       provide: NGSSM_ACCESS_TOKEN_PROVIDER,
-      useValue: accessTokenProvider
+      useClass: accessTokenProviderType
     },
     {
       provide: NGSSM_ACCESS_TOKEN_OBSERVABLE,
-      useValue: accessToken
+      useFactory: accessTokenObservableFactory,
+      deps: factoryDeps
     },
     {
       provide: APP_INITIALIZER,
