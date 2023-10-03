@@ -14,7 +14,7 @@ export interface AccessTokenEvent extends NgssmEvent {
   token: string;
 }
 export const getAccessTokenEvent = (token: string): AccessTokenEvent => ({
-  type: requestAccessTokenEvent,
+  type: accessTokenEvent,
   token
 });
 
