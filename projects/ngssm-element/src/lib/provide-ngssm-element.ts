@@ -47,20 +47,26 @@ export interface AccessTokenProvider {
 
 export const NGSSM_ACCESS_TOKEN_PROVIDER = new InjectionToken<AccessTokenProvider>('NGSSM_ACCESS_TOKEN_PROVIDER');
 export const NGSSM_ACCESS_TOKEN_OBSERVABLE = new InjectionToken<Observable<string>>('NGSSM_ACCESS_TOKEN_OBSERVABLE');
-export const publishAccessToken = (eventBus: NgssmEventBus, accessTokenProvider: AccessTokenProvider): void => {
+export const publishAccessToken = (
+  eventBus: NgssmEventBus,
+  accessTokenProvider: AccessTokenProvider,
+  accessTokenStore: AccessTokenStore
+): void => {
   const token = accessTokenProvider.getAccessToken();
+  accessTokenStore.accessToken = token;
   eventBus.publish(getAccessTokenEvent(token));
 };
 
 export const publishAccessTokenFactory = (
   eventBus: NgssmEventBus,
   accessTokenProvider: AccessTokenProvider,
-  accessToken: Observable<string>
+  accessToken: Observable<string>,
+  accessTokenStore: AccessTokenStore
 ): (() => void) => {
   return () => {
-    publishAccessToken(eventBus, accessTokenProvider);
+    publishAccessToken(eventBus, accessTokenProvider, accessTokenStore);
     eventBus.event$.pipe(filter((e) => e.type === requestAccessTokenEvent)).subscribe(() => {
-      publishAccessToken(eventBus, accessTokenProvider);
+      publishAccessToken(eventBus, accessTokenProvider, accessTokenStore);
     });
 
     accessToken.subscribe((a) => eventBus.publish(getAccessTokenEvent(a)));
@@ -87,7 +93,7 @@ export const provideNgssmElementForElementsHost = (
     {
       provide: APP_INITIALIZER,
       useFactory: publishAccessTokenFactory,
-      deps: [NgssmEventBus, NGSSM_ACCESS_TOKEN_PROVIDER, NGSSM_ACCESS_TOKEN_OBSERVABLE],
+      deps: [NgssmEventBus, NGSSM_ACCESS_TOKEN_PROVIDER, NGSSM_ACCESS_TOKEN_OBSERVABLE, AccessTokenStore],
       multi: true
     }
   ]);
