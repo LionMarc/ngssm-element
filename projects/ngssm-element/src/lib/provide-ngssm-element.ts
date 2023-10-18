@@ -3,6 +3,7 @@ import { Observable, filter } from 'rxjs';
 
 import { NgssmEvent, NgssmEventBus } from './ngssm-event-bus';
 import { AccessTokenStore } from './access-token-store';
+import { Logger } from 'ngssm-store';
 
 export const requestAccessTokenEvent = 'request-access-token';
 export const getRequestAccessTokenEvent = (): NgssmEvent => ({
@@ -61,7 +62,8 @@ export const publishAccessTokenFactory = (
   eventBus: NgssmEventBus,
   accessTokenProvider: AccessTokenProvider,
   accessToken: Observable<string>,
-  accessTokenStore: AccessTokenStore
+  accessTokenStore: AccessTokenStore,
+  logger: Logger
 ): (() => void) => {
   return () => {
     publishAccessToken(eventBus, accessTokenProvider, accessTokenStore);
@@ -69,7 +71,11 @@ export const publishAccessTokenFactory = (
       publishAccessToken(eventBus, accessTokenProvider, accessTokenStore);
     });
 
-    accessToken.subscribe((a) => eventBus.publish(getAccessTokenEvent(a)));
+    accessToken.subscribe((a) => {
+      logger.information(`[publishAccessTokenFactory] New access token notified`);
+      accessTokenStore.accessToken = a;
+      eventBus.publish(getAccessTokenEvent(a));
+    });
   };
 };
 
@@ -93,7 +99,7 @@ export const provideNgssmElementForElementsHost = (
     {
       provide: APP_INITIALIZER,
       useFactory: publishAccessTokenFactory,
-      deps: [NgssmEventBus, NGSSM_ACCESS_TOKEN_PROVIDER, NGSSM_ACCESS_TOKEN_OBSERVABLE, AccessTokenStore],
+      deps: [NgssmEventBus, NGSSM_ACCESS_TOKEN_PROVIDER, NGSSM_ACCESS_TOKEN_OBSERVABLE, AccessTokenStore, Logger],
       multi: true
     }
   ]);
