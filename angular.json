@@ -91,10 +91,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngssm-element-demo:build:production"
+              "buildTarget": "ngssm-element-demo:build:production"
             },
             "development": {
-              "browserTarget": "ngssm-element-demo:build:development"
+              "buildTarget": "ngssm-element-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -102,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngssm-element-demo:build"
+            "buildTarget": "ngssm-element-demo:build"
           }
         },
         "test": {
@@ -271,10 +271,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "element-provider:build:production"
+              "buildTarget": "element-provider:build:production"
             },
             "development": {
-              "browserTarget": "element-provider:build:development"
+              "buildTarget": "element-provider:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -282,7 +282,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "element-provider:build"
+            "buildTarget": "element-provider:build"
           }
         },
         "test": {
@@ -387,10 +387,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "SimpleElementProvider:build:production"
+              "buildTarget": "SimpleElementProvider:build:production"
             },
             "development": {
-              "browserTarget": "SimpleElementProvider:build:development"
+              "buildTarget": "SimpleElementProvider:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -398,7 +398,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SimpleElementProvider:build"
+            "buildTarget": "SimpleElementProvider:build"
           }
         },
         "test": {
