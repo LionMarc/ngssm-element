@@ -43,3 +43,5 @@ Thumbs.db
 
 /src/assets/provided-elements.js
 /src/assets/simple-elements.js
+/src/assets/element-provider/
+/src/assets/simple-element-provider

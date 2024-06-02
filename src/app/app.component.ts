@@ -51,11 +51,11 @@ export class AppComponent {
   ) {
     consoleAppender.start();
     elementsLoaderService.addElementConfig({
-      url: './assets/provided-elements.js',
+      url: './assets/element-provider/element-provider.js',
       names: ['ngssm-football-teams-dashboard']
     });
     elementsLoaderService.addElementConfig({
-      url: './assets/simple-elements.js',
+      url: './assets/simple-element-provider/simple-element-provider.js',
       names: ['ngssm-element-simple', 'ngssm-element-second']
     });
 

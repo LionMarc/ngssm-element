@@ -10,8 +10,8 @@
     "lint": "ng lint",
     "build:ngssm-element": "ng build --project=ngssm-element",
     "test:ngssm-element": "ng test --no-watch --browsers=ChromeHeadless --project=ngssm-element --code-coverage",
-    "build:element-provider": "ng build --project=element-provider && cat ./dist/element-provider/runtime*.js ./dist/element-provider/polyfill*.js ./dist/element-provider/main*.js > ./src/assets/provided-elements.js",
-    "build:simple-element-provider": "ng build --project=simple-element-provider && cat ./dist/simple-element-provider/runtime*.js ./dist/simple-element-provider/polyfill*.js ./dist/simple-element-provider/main*.js > ./src/assets/simple-elements.js",
+    "build:element-provider": "ng build --project=element-provider && rm -rf ./src/assets/element-provider && mkdir -p ./src/assets/element-provider && cp -r ./dist/element-provider/browser/* ./src/assets/element-provider && mv ./src/assets/element-provider/main*js ./src/assets/element-provider/element-provider.js",
+    "build:simple-element-provider": "ng build --project=simple-element-provider && rm -rf ./src/assets/simple-element-provider && mkdir -p ./src/assets/simple-element-provider && cp -r ./dist/simple-element-provider/browser/* ./src/assets/simple-element-provider && mv ./src/assets/simple-element-provider/main*js ./src/assets/simple-element-provider/simple-element-provider.js",
     "build:all": "npm run build:element-provider && npm run build:simple-element-provider && npm run build:ngssm-element"
   },
   "private": true,
@@ -62,6 +62,7 @@
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "mkdirp":"^3.0.1",
     "ng-packagr": "^18.0.0",
     "ngssm-schematics": "^18.0.0",
     "prettier": "^3.3.0",
