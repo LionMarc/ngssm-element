@@ -28,11 +28,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ngssm-element-demo",
+            "outputPath": {
+              "base": "dist/ngssm-element-demo"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -58,7 +59,8 @@
             },
             "allowedCommonJsDependencies": [
               "immutability-helper"
-            ]
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -77,9 +79,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -208,11 +208,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/element-provider",
+            "outputPath": {
+              "base": "dist/element-provider"
+            },
             "index": "projects/element-provider/src/index.html",
-            "main": "projects/element-provider/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -238,7 +239,8 @@
             },
             "allowedCommonJsDependencies": [
               "immutability-helper"
-            ]
+            ],
+            "browser": "projects/element-provider/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -257,9 +259,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -334,11 +334,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/simple-element-provider",
+            "outputPath": {
+              "base": "dist/simple-element-provider"
+            },
             "index": "projects/simple-element-provider/src/index.html",
-            "main": "projects/simple-element-provider/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -354,7 +355,8 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "immutability-helper"
-            ]
+            ],
+            "browser": "projects/simple-element-provider/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -373,9 +375,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
