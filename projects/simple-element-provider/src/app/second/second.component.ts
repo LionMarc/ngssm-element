@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { NgSsmComponent, Store } from 'ngssm-store';
 
 @Component({
-    selector: 'app-second',
-    imports: [CommonModule],
-    templateUrl: './second.component.html',
-    styleUrls: ['./second.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-second',
+  imports: [CommonModule],
+  templateUrl: './second.component.html',
+  styleUrls: ['./second.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SecondComponent extends NgSsmComponent {
   constructor(store: Store) {

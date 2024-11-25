@@ -13,23 +13,23 @@ import { NgssmCachesDisplayButtonComponent } from 'ngssm-remote-data';
 import { ConsoleAppender, Logger } from 'ngssm-store';
 
 @Component({
-    selector: 'app-root',
-    imports: [
-        CommonModule,
-        RouterOutlet,
-        FormsModule,
-        ReactiveFormsModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatToolbarModule,
-        MatCardModule,
-        MatInputModule,
-        MatButtonModule,
-        NgssmElementComponent,
-        NgssmCachesDisplayButtonComponent
-    ],
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+  selector: 'app-root',
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    FormsModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    NgssmElementComponent,
+    NgssmCachesDisplayButtonComponent
+  ],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   public readonly elementNames: string[] = [
