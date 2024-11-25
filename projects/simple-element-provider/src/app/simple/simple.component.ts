@@ -5,7 +5,6 @@ import { NgSsmComponent, Store } from 'ngssm-store';
 
 @Component({
   selector: 'app-simple',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './simple.component.html',
   styleUrls: ['./simple.component.scss'],

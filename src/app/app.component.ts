@@ -14,7 +14,6 @@ import { ConsoleAppender, Logger } from 'ngssm-store';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     CommonModule,
     RouterOutlet,
