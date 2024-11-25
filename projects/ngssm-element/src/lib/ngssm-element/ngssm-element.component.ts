@@ -12,11 +12,10 @@ import { WithAccessToken } from '../with-access-token';
 import { Logger } from 'ngssm-store';
 
 @Component({
-  selector: 'ngssm-element',
-  standalone: true,
-  imports: [CommonModule, MatProgressSpinnerModule, MatIconModule],
-  templateUrl: './ngssm-element.component.html',
-  styleUrls: ['./ngssm-element.component.scss']
+    selector: 'ngssm-element',
+    imports: [CommonModule, MatProgressSpinnerModule, MatIconModule],
+    templateUrl: './ngssm-element.component.html',
+    styleUrls: ['./ngssm-element.component.scss']
 })
 export class NgssmElementComponent implements OnDestroy {
   private element: HTMLElement | undefined;

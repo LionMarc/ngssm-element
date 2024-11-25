@@ -9,12 +9,11 @@ import { NgssmCachesDisplayButtonComponent } from 'ngssm-remote-data';
 import { NgssmEventBus } from 'ngssm-element';
 
 @Component({
-  selector: 'app-football-teams-dashboard',
-  standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, NgssmCachesDisplayButtonComponent],
-  templateUrl: './football-teams-dashboard.component.html',
-  styleUrls: ['./football-teams-dashboard.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-football-teams-dashboard',
+    imports: [CommonModule, MatCardModule, MatButtonModule, NgssmCachesDisplayButtonComponent],
+    templateUrl: './football-teams-dashboard.component.html',
+    styleUrls: ['./football-teams-dashboard.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FootballTeamsDashboardComponent extends NgSsmComponent {
   constructor(

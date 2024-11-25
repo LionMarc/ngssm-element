@@ -1,4 +1,11 @@
-import { APP_INITIALIZER, EnvironmentProviders, InjectionToken, Type, makeEnvironmentProviders } from '@angular/core';
+import {
+  EnvironmentProviders,
+  InjectionToken,
+  Type,
+  makeEnvironmentProviders,
+  inject,
+  provideAppInitializer
+} from '@angular/core';
 import { Observable, filter } from 'rxjs';
 
 import { NgssmEvent, NgssmEventBus } from './ngssm-event-bus';
@@ -33,12 +40,7 @@ export const requestAndStoreAccessToken = (
 
 export const provideNgssmElementForElementsProvider = (): EnvironmentProviders => {
   return makeEnvironmentProviders([
-    {
-      provide: APP_INITIALIZER,
-      useFactory: requestAndStoreAccessToken,
-      deps: [NgssmEventBus, AccessTokenStore],
-      multi: true
-    }
+    provideAppInitializer(requestAndStoreAccessToken(inject(NgssmEventBus), inject(AccessTokenStore)))
   ]);
 };
 
@@ -58,13 +60,12 @@ export const publishAccessToken = (
   eventBus.publish(getAccessTokenEvent(token));
 };
 
-export const publishAccessTokenFactory = (
-  eventBus: NgssmEventBus,
-  accessTokenProvider: AccessTokenProvider,
-  accessToken: Observable<string>,
-  accessTokenStore: AccessTokenStore,
-  logger: Logger
-): (() => void) => {
+export const publishAccessTokenFactory = (): (() => void) => {
+  const eventBus = inject(NgssmEventBus);
+  const accessTokenProvider: AccessTokenProvider = inject(NGSSM_ACCESS_TOKEN_PROVIDER);
+  const accessToken: Observable<string> = inject(NGSSM_ACCESS_TOKEN_OBSERVABLE);
+  const accessTokenStore = inject(AccessTokenStore);
+  const logger = inject(Logger);
   return () => {
     publishAccessToken(eventBus, accessTokenProvider, accessTokenStore);
     eventBus.event$.pipe(filter((e) => e.type === requestAccessTokenEvent)).subscribe(() => {
@@ -81,8 +82,7 @@ export const publishAccessTokenFactory = (
 
 export const provideNgssmElementForElementsHost = (
   accessTokenProviderType: Type<AccessTokenProvider>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  accessTokenObservableFactory: Function,
+  accessTokenObservableFactory: () => () => Observable<string>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   factoryDeps?: any[]
 ): EnvironmentProviders => {
@@ -96,11 +96,6 @@ export const provideNgssmElementForElementsHost = (
       useFactory: accessTokenObservableFactory,
       deps: factoryDeps
     },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: publishAccessTokenFactory,
-      deps: [NgssmEventBus, NGSSM_ACCESS_TOKEN_PROVIDER, NGSSM_ACCESS_TOKEN_OBSERVABLE, AccessTokenStore, Logger],
-      multi: true
-    }
+    provideAppInitializer(publishAccessTokenFactory())
   ]);
 };
