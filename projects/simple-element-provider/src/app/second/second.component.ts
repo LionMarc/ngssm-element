@@ -1,19 +1,15 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NgSsmComponent, Store } from 'ngssm-store';
-
 @Component({
-  selector: 'app-second',
+  selector: 'ngssm-second',
   imports: [CommonModule],
   templateUrl: './second.component.html',
   styleUrls: ['./second.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SecondComponent extends NgSsmComponent {
-  constructor(store: Store) {
-    super(store);
-
-    this.unsubscribeAll$.subscribe(() => console.log('SecondComponent DESTROYED'));
+export class SecondComponent implements OnDestroy {
+  public ngOnDestroy(): void {
+    console.log('SecondComponent DESTROYED');
   }
 }

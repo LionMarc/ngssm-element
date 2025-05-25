@@ -13,7 +13,7 @@ import { NgssmCachesDisplayButtonComponent } from 'ngssm-remote-data';
 import { ConsoleAppender, Logger } from 'ngssm-store';
 
 @Component({
-  selector: 'app-root',
+  selector: 'ngssm-root',
   imports: [
     CommonModule,
     RouterOutlet,

@@ -9,7 +9,7 @@ import { NgssmCachesDisplayButtonComponent } from 'ngssm-remote-data';
 import { NgssmEventBus } from 'ngssm-element';
 
 @Component({
-  selector: 'app-football-teams-dashboard',
+  selector: 'ngssm-football-teams-dashboard',
   imports: [CommonModule, MatCardModule, MatButtonModule, NgssmCachesDisplayButtonComponent],
   templateUrl: './football-teams-dashboard.component.html',
   styleUrls: ['./football-teams-dashboard.component.scss'],
