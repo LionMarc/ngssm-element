@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { DOCUMENT } from '@angular/common';
 import { take } from 'rxjs';
@@ -34,7 +33,7 @@ describe('NgssmElementsLoaderService', () => {
       }
     };
 
-    spyOn(document, 'createElement').and.returnValue(script as any);
+    spyOn(document, 'createElement').and.returnValue(script as unknown as HTMLElement);
     spyOn(document.body, 'appendChild');
   });
 
@@ -67,7 +66,6 @@ describe('NgssmElementsLoaderService', () => {
       it(`should create a script element in the document`, () => {
         service.load('one');
 
-        // eslint-disable-next-line deprecation/deprecation
         expect(document.createElement).toHaveBeenCalled();
       });
 
@@ -99,11 +97,9 @@ describe('NgssmElementsLoaderService', () => {
       });
 
       it(`should not create a script element in the document`, () => {
-        // eslint-disable-next-line deprecation/deprecation
-        (document.createElement as any).calls.reset();
+        (document.createElement as jasmine.Spy).calls.reset();
         service.load('one');
 
-        // eslint-disable-next-line deprecation/deprecation
         expect(document.createElement).not.toHaveBeenCalled();
       });
     });

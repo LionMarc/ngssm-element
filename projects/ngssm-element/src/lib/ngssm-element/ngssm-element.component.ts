@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Input, OnDestroy, ViewContainerRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -6,10 +5,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { filter, take } from 'rxjs';
 
 import { RemoteCall, RemoteCallStatus } from 'ngssm-remote-data';
+import { Logger } from 'ngssm-store';
 
 import { NgssmElementsLoaderService } from '../ngssm-elements-loader.service';
 import { WithAccessToken } from '../with-access-token';
-import { Logger } from 'ngssm-store';
 
 @Component({
   selector: 'ngssm-element',
@@ -21,7 +20,7 @@ export class NgssmElementComponent implements OnDestroy {
   private element: HTMLElement | undefined;
   private _data: object | undefined;
   private _accessToken: string | null | undefined;
-  private _attributes: { name: string; value: any }[] = [];
+  private _attributes: { name: string; value: string }[] = [];
   private _debug = false;
 
   public readonly loadingStatus = signal<RemoteCall>({ status: RemoteCallStatus.inProgress });
@@ -33,7 +32,7 @@ export class NgssmElementComponent implements OnDestroy {
     private logger: Logger
   ) {}
 
-  @Input() public set attributes(value: { name: string; value: any }[]) {
+  @Input() public set attributes(value: { name: string; value: string }[]) {
     this._attributes = value;
     this.setAttributesToElement();
   }
@@ -122,8 +121,7 @@ export class NgssmElementComponent implements OnDestroy {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const withAccessToken: WithAccessToken = this.element as any;
+    const withAccessToken: WithAccessToken = this.element as unknown as WithAccessToken;
     withAccessToken.accessToken = this._accessToken;
   }
 }

@@ -130,7 +130,8 @@
             "lintFilePatterns": [
               "src/**/*.ts",
               "src/**/*.html"
-            ]
+            ],
+            "eslintConfig": "./eslint.config.js"
           }
         }
       }
@@ -184,7 +185,8 @@
             "lintFilePatterns": [
               "projects/ngssm-element/**/*.ts",
               "projects/ngssm-element/**/*.html"
-            ]
+            ],
+            "eslintConfig": "projects/ngssm-element/eslint.config.js"
           }
         }
       }
@@ -310,7 +312,8 @@
             "lintFilePatterns": [
               "projects/element-provider/**/*.ts",
               "projects/element-provider/**/*.html"
-            ]
+            ],
+            "eslintConfig": "projects/element-provider/eslint.config.js"
           }
         }
       }
@@ -426,7 +429,8 @@
             "lintFilePatterns": [
               "projects/simple-element-provider/**/*.ts",
               "projects/simple-element-provider/**/*.html"
-            ]
+            ],
+            "eslintConfig": "projects/simple-element-provider/eslint.config.js"
           }
         }
       }
@@ -438,6 +442,11 @@
     },
     "@angular-eslint/schematics:library": {
       "setParserOptionsProject": true
+    },
+    "@schematics/angular": {
+      "component": {
+        "changeDetection": "OnPush"
+      }
     }
   }
 }
