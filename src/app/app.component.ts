@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,7 +40,12 @@ export class AppComponent {
 
   public readonly selectedElementName = signal<string | undefined>(undefined);
   public readonly counterControl = new FormControl(0);
-  public readonly data = signal<{ count: number }>({ count: 0 });
+  public readonly nameControl = new FormControl<string | undefined>(undefined);
+  public readonly formGroup = new FormGroup({
+    count: this.counterControl,
+    name: this.nameControl
+  });
+  public readonly data = signal<{ count: number; name?: string }>({ count: 0 });
 
   constructor(
     elementsLoaderService: NgssmElementsLoaderService,
@@ -58,7 +63,9 @@ export class AppComponent {
       names: ['ngssm-element-simple', 'ngssm-element-second']
     });
 
-    this.counterControl.valueChanges.subscribe((value) => this.data.set({ count: value ?? -1 }));
+    this.formGroup.valueChanges.subscribe((value) =>
+      this.data.set({ count: value?.count ?? -1, name: value?.name ?? undefined })
+    );
 
     this.eventBus.event$.subscribe((e) => this.logger.information(`Event of type '${e.type}' received`, e));
   }

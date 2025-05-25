@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, input, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NgSsmComponent, Store } from 'ngssm-store';
@@ -11,10 +11,17 @@ import { NgSsmComponent, Store } from 'ngssm-store';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleComponent extends NgSsmComponent {
+  public readonly name = input<string | undefined>(undefined);
+
   constructor(store: Store) {
     super(store);
 
     this.unsubscribeAll$.subscribe(() => console.log('SimpleComponent DESTROYED'));
+
+    effect(() => {
+      const currentName = this.name();
+      console.log('[SimpleComponent]', currentName);
+    });
   }
 
   @Input() public count = 0;
