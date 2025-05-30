@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, ViewContainerRef, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { filter, take } from 'rxjs';
@@ -12,7 +12,7 @@ import { WithAccessToken } from '../with-access-token';
 
 @Component({
   selector: 'ngssm-element',
-  imports: [CommonModule, MatProgressSpinnerModule, MatIconModule],
+  imports: [MatProgressSpinnerModule, MatIconModule],
   templateUrl: './ngssm-element.component.html',
   styleUrls: ['./ngssm-element.component.scss']
 })

@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'ngssm-second',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './second.component.html',
   styleUrls: ['./second.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

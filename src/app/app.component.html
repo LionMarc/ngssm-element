@@ -14,9 +14,11 @@
       <mat-form-field>
         <mat-label>Select an element to display</mat-label>
         <mat-select [ngModel]="selectedElementName()" (selectionChange)="selectedElementName.set($event.value)">
-          <mat-option *ngFor="let elementName of elementNames" [value]="elementName">
-            {{ elementName }}
-          </mat-option>
+          @for (elementName of elementNames; track elementName) {
+            <mat-option [value]="elementName">
+              {{ elementName }}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
       <button mat-stroked-button color="primary" (click)="publisEventToFootballTeam()">

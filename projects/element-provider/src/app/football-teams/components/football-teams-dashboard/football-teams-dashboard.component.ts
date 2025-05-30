@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { takeUntil } from 'rxjs';
@@ -10,7 +10,7 @@ import { NgssmEventBus } from 'ngssm-element';
 
 @Component({
   selector: 'ngssm-football-teams-dashboard',
-  imports: [CommonModule, MatCardModule, MatButtonModule, NgssmCachesDisplayButtonComponent],
+  imports: [MatCardModule, MatButtonModule, NgssmCachesDisplayButtonComponent],
   templateUrl: './football-teams-dashboard.component.html',
   styleUrls: ['./football-teams-dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
