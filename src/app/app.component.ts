@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -15,7 +15,6 @@ import { ConsoleAppender, Logger } from 'ngssm-store';
 @Component({
   selector: 'ngssm-root',
   imports: [
-    CommonModule,
     RouterOutlet,
     FormsModule,
     ReactiveFormsModule,
@@ -27,7 +26,7 @@ import { ConsoleAppender, Logger } from 'ngssm-store';
     MatButtonModule,
     NgssmElementComponent,
     NgssmCachesDisplayButtonComponent
-  ],
+],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

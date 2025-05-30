@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, Input, input, effect, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'ngssm-simple',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './simple.component.html',
   styleUrls: ['./simple.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
