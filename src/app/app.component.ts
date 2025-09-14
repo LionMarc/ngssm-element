@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,11 +26,16 @@ import { ConsoleAppender, Logger } from 'ngssm-store';
     MatButtonModule,
     NgssmElementComponent,
     NgssmCachesDisplayButtonComponent
-],
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  private readonly elementsLoaderService = inject(NgssmElementsLoaderService);
+  private readonly consoleAppender = inject(ConsoleAppender);
+  private readonly eventBus = inject(NgssmEventBus);
+  private readonly logger = inject(Logger);
+
   public readonly elementNames: string[] = [
     'ngssm-football-teams-dashboard',
     'ngssm-element-simple',
@@ -46,18 +51,13 @@ export class AppComponent {
   });
   public readonly data = signal<{ count: number; name?: string }>({ count: 0 });
 
-  constructor(
-    elementsLoaderService: NgssmElementsLoaderService,
-    consoleAppender: ConsoleAppender,
-    private eventBus: NgssmEventBus,
-    private logger: Logger
-  ) {
-    consoleAppender.start();
-    elementsLoaderService.addElementConfig({
+  constructor() {
+    this.consoleAppender.start();
+    this.elementsLoaderService.addElementConfig({
       url: './assets/element-provider/element-provider.js',
       names: ['ngssm-football-teams-dashboard']
     });
-    elementsLoaderService.addElementConfig({
+    this.elementsLoaderService.addElementConfig({
       url: './assets/simple-element-provider/simple-element-provider.js',
       names: ['ngssm-element-simple', 'ngssm-element-second']
     });

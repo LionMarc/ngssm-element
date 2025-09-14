@@ -1,17 +1,33 @@
-import { fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
-import { Logger } from 'ngssm-store';
 import { NgssmEvent } from 'ngssm-element';
 
 import { NgssmEventBus } from './ngssm-event-bus';
+import { InjectionToken } from '@angular/core';
+
+const firstBus = new InjectionToken<NgssmEventBus>('firstBus');
+const secondBus = new InjectionToken<NgssmEventBus>('secondBus');
 
 describe('NgssmEventBus', () => {
   let bus1: NgssmEventBus;
   let bus2: NgssmEventBus;
 
   beforeEach(() => {
-    bus1 = new NgssmEventBus(new Logger());
-    bus2 = new NgssmEventBus(new Logger());
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: firstBus,
+          useFactory: () => new NgssmEventBus()
+        },
+        {
+          provide: secondBus,
+          useFactory: () => new NgssmEventBus()
+        }
+      ]
+    });
+
+    bus1 = TestBed.inject(firstBus);
+    bus2 = TestBed.inject(secondBus);
   });
 
   afterEach(() => {

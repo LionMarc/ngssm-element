@@ -4,8 +4,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { Logger } from 'ngssm-store';
-
 import {
   accessTokenEvent,
   AccessTokenProvider,
@@ -34,9 +32,6 @@ describe('provide-ngssm-element', () => {
 
       accessTokenObservable = new BehaviorSubject<string>('my-token');
 
-      eventBus = new NgssmEventBus(new Logger());
-      eventBusSpy = spyOn(eventBus, 'publish').and.callThrough();
-
       TestBed.configureTestingModule({
         providers: [
           provideNgssmElementForElementsHost(
@@ -44,7 +39,13 @@ describe('provide-ngssm-element', () => {
             () => accessTokenObservable
           )
         ]
-      }).overrideProvider(NgssmEventBus, { useValue: eventBus });
+      }).overrideProvider(NgssmEventBus, {
+        useFactory: () => {
+          eventBus = new NgssmEventBus();
+          eventBusSpy = spyOn(eventBus, 'publish').and.callThrough();
+          return eventBus;
+        }
+      });
 
       await TestBed.inject(ApplicationInitStatus).donePromise;
 
@@ -100,12 +101,15 @@ describe('provide-ngssm-element', () => {
     let accessTokenStore: AccessTokenStore;
 
     beforeEach(async () => {
-      eventBus = new NgssmEventBus(new Logger());
-      spyOn(eventBus, 'publish').and.callThrough();
-
       TestBed.configureTestingModule({
         providers: [provideNgssmElementForElementsProvider()]
-      }).overrideProvider(NgssmEventBus, { useValue: eventBus });
+      }).overrideProvider(NgssmEventBus, {
+        useFactory: () => {
+          eventBus = new NgssmEventBus();
+          spyOn(eventBus, 'publish').and.callThrough();
+          return eventBus;
+        }
+      });
 
       await TestBed.inject(ApplicationInitStatus).donePromise;
 
