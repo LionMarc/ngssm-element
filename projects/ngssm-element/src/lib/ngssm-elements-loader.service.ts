@@ -1,4 +1,4 @@
-import { Inject, Injectable, DOCUMENT } from '@angular/core';
+import { Injectable, DOCUMENT, inject } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -16,12 +16,10 @@ interface ExtendedNgssmElementConfig {
   providedIn: 'root'
 })
 export class NgssmElementsLoaderService {
-  private readonly elementConfigs: ExtendedNgssmElementConfig[] = [];
+  private readonly logger = inject(Logger);
+  private readonly document: Document = inject(DOCUMENT);
 
-  constructor(
-    private logger: Logger,
-    @Inject(DOCUMENT) private document: Document
-  ) {}
+  private readonly elementConfigs: ExtendedNgssmElementConfig[] = [];
 
   public addElementConfig(elementConfig: NgssmElementConfig): boolean {
     const config = this.elementConfigs.find((e) => e.config.url === elementConfig.url);

@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { Logger } from 'ngssm-store';
 import { Observable, Subject } from 'rxjs';
 
@@ -10,11 +10,12 @@ export interface NgssmEvent {
   providedIn: 'root'
 })
 export class NgssmEventBus implements OnDestroy {
+  private readonly logger = inject(Logger);
   private readonly customEventId = 'ngssm-element';
   private readonly _event$ = new Subject<NgssmEvent>();
   private readonly _eventHandler: EventListener;
 
-  constructor(private logger: Logger) {
+  constructor() {
     this._eventHandler = (event) => {
       const detail: NgssmEvent = (event as CustomEvent).detail;
       this._event$.next(detail);

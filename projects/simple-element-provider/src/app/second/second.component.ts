@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
-
 @Component({
   selector: 'ngssm-second',
   imports: [],

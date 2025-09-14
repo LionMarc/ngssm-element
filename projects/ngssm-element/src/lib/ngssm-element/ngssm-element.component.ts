@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, ViewContainerRef, signal } from '@angular/core';
+import { Component, Input, OnDestroy, ViewContainerRef, inject, signal } from '@angular/core';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +17,10 @@ import { WithAccessToken } from '../with-access-token';
   styleUrls: ['./ngssm-element.component.scss']
 })
 export class NgssmElementComponent implements OnDestroy {
+  private readonly viewContainerRef = inject(ViewContainerRef);
+  private readonly loaderService = inject(NgssmElementsLoaderService);
+  private readonly logger = inject(Logger);
+
   private element: HTMLElement | undefined;
   private _data: object | undefined;
   private _accessToken: string | null | undefined;
@@ -25,12 +29,6 @@ export class NgssmElementComponent implements OnDestroy {
 
   public readonly loadingStatus = signal<RemoteCall>({ status: RemoteCallStatus.inProgress });
   public readonly remoteCallStatus = RemoteCallStatus;
-
-  constructor(
-    private viewContainerRef: ViewContainerRef,
-    private loaderService: NgssmElementsLoaderService,
-    private logger: Logger
-  ) {}
 
   @Input() public set attributes(value: { name: string; value: string }[]) {
     this._attributes = value;

@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, input, effect, OnDestroy } from '@angular/core';
 
-
 @Component({
   selector: 'ngssm-simple',
   imports: [],
