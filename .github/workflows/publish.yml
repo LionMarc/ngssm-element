@@ -19,6 +19,7 @@ jobs:
         run: npm install -g npm@latest
       - run: npm ci
       - run: npm run build:ngssm-element
-      - run: chmod +x publish_packages.sh
-      - run: ./publish_packages.sh ${{ github.event.release.tag_name }}
-        shell: bash
+      - run: |
+          cd dist/ngssm-element
+          npm version ${{ github.event.release.tag_name }}
+          npm publish --verbose
