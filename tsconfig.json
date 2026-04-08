@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
@@ -14,7 +13,7 @@
     "sourceMap": true,
     "paths": {
       "ngssm-element": [
-        "dist/ngssm-element"
+        "./dist/ngssm-element"
       ]
     },
     "declaration": false,
@@ -30,5 +29,32 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/element-provider/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/element-provider/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/simple-element-provider/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/simple-element-provider/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngssm-element/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngssm-element/tsconfig.spec.json"
+    }
+  ]
 }
