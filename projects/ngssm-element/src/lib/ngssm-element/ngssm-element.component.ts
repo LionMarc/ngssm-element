@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, ViewContainerRef, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnDestroy, ViewContainerRef, inject, signal } from '@angular/core';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +14,6 @@ import { WithAccessToken } from '../with-access-token';
   selector: 'ngssm-element',
   imports: [MatProgressSpinnerModule, MatIconModule],
   templateUrl: './ngssm-element.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./ngssm-element.component.scss']
 })
 export class NgssmElementComponent implements OnDestroy {
