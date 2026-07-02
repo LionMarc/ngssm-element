@@ -59,7 +59,7 @@
     "mkdirp": "3.0.1",
     "ng-packagr": "22.0.1",
     "ngssm-schematics": "22.0.0",
-    "prettier": "3.8.4",
+    "prettier": "3.9.4",
     "typescript": "6.0.3",
     "typescript-eslint": "8.62.1"
   }
