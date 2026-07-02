@@ -57,7 +57,7 @@
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.2.0",
     "mkdirp": "3.0.1",
-    "ng-packagr": "22.0.0",
+    "ng-packagr": "22.0.1",
     "ngssm-schematics": "22.0.0",
     "prettier": "3.8.4",
     "typescript": "6.0.3",
