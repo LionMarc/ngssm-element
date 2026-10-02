@@ -42,7 +42,7 @@
     "@angular/compiler-cli": "22.2.0",
     "@eslint/js": "10.0.1",
     "@types/jasmine": "6.0.0",
-    "@types/luxon": "3.7.5",
+    "@types/luxon": "3.7.6",
     "angular-eslint": "22.5.0",
     "eslint": "10.11.0",
     "eslint-config-prettier": "10.1.8",
